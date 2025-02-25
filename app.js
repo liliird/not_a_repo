@@ -126,6 +126,11 @@ app.use("/plantas/agregar", (request, response, next) => {
   response.send(html_header + html_form + html_footer);
 });
 
+//app.post es para registrar un middleware para peticiones HTTP POST
+app.post("/plantas/agregar", (request, response, next) => {
+  response.send(html_header + html_form + html_footer);
+});
+
 app.use((request, response, next) => {
   console.log("Otro middleware!");
   response.send("¡Hola mundo!"); //Manda la respuesta
