@@ -3,6 +3,7 @@
   <head>
     <title>Laboratorio 1</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="estilos.css" />
   </head>
   <body>
     <h1>Laboratorio 1</h1>
@@ -184,6 +185,53 @@
       El ciclo de vida de un sistema de información comprende una serie de
       etapas entre las que se encuentran planificación, análisis, diseño,
       implementación, pruebas, instalación o despliegue, uso y mantenimiento.
+    </p>
+
+    <h3>
+      Como ingeniero de software ¿cuál es tu recomendación sobre el uso de
+      !important en un CSS?
+    </h3>
+    <p>
+      Desde lo que he visto hasta ahora, !important es una forma de forzar a que
+      un estilo se aplique, mi recomendación sería evitar usarlo en medida de lo
+      posible, ya que puede hacer que el código sea más difícil de entender y
+      mantener, aunque sé que hay casos donde es necesario usarlo, intentaría
+      usarlo con moderación y solo cuando se requiera realmente.
+    </p>
+
+    <h3>
+      Si se pone una imagen de fondo en una página HTML, ¿por qué debe escogerse
+      con cuidado?
+    </h3>
+    <p>
+      Porque podía ser muy pesada y afectar el rendimiento de la página. Además
+      debe tener un color y constrate adecuados para que el texto y otros
+      elementos de la página sean legibles. Así como también debe adaptarse a
+      diferentes dispositivos y tamaños de pantalla.
+    </p>
+
+    <h3>
+      Como ingeniero de software, ¿cuál es tu recomendación al elegir las
+      unidades de un propiedad de estilo entre %, px y pt?
+    </h3>
+    <p>
+      Yo recomendaría usar % para propiedades como width, height, margin o
+      padding, ya que es útil para crear diseños responsivos que se puedan
+      adaptar al tamaño de la pantalla. Px lo utilizaría para propiedades que
+      requieran un tamaño fijo y preciso como border-width o font-size. Por su
+      parte, pt es útil para propiedades relacionadas con la tipografía, por lo
+      que creo que es más apto para impresion que para diseño web.
+    </p>
+
+    <h3>
+      ¿Por qué el uso de una versión minimizada del CSS mejora el rendimiento
+      del sitio?
+    </h3>
+    <p>
+      Porque esto reduce el tamaño del archivo, lo que a su vez mejora el
+      rendimiento de la página. Menos código implica un tiempo de descarga
+      menor, esto optimiza la experiencia del usuario, aunque en ocasiones sea
+      por unidades de tiempo que este no alcance a percibir.
     </p>
 
     <h2>Referencias bibliograficas</h2>
