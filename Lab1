@@ -3,7 +3,7 @@
   <head>
     <title>Laboratorio 1</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="estilos.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
   </head>
   <body>
     <h1>Laboratorio 1</h1>
