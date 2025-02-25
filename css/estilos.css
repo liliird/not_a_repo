@@ -1,61 +1,39 @@
-/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
 }
-
-h1,
-h2,
-h3 {
-  color: #333;
-}
-
-/* Títulos */
 h1 {
   text-align: center;
   background-color: #3498db;
-  color: white;
+  color: #fff;
   padding: 20px;
 }
-
 h2 {
   color: #2c3e50;
 }
-
-/* Párrafos */
 p {
   line-height: 1.6;
   margin-bottom: 20px;
 }
-
 dl {
   margin-left: 20px;
 }
-
-/* Lista ordenada */
 ol {
   padding-left: 20px;
 }
-
-/* Sección de preguntas */
 h3 {
   color: #2ecc71;
   font-size: 18px;
 }
-
-/* Estilos para los enlaces */
 a {
   color: #3498db;
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
-
-/* Respuesta */
 dd {
   margin-bottom: 10px;
 }
