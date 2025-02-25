@@ -1,0 +1,13 @@
+#node artifact files
+node_modules/
+dist/
+
+#Compiled java class files
+*.class
+
+#Compiled Python bytecode
+*.py[cod]
+
+# Ignorar archivos temporales del sistema
+.DS_Store
+Thumbs.db
