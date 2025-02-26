@@ -2,27 +2,29 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Tabla de Números</title>
+    <title>Ejercicios JavaScript</title>
   </head>
   <body>
-    <script>
-      let num = parseInt(prompt("Introduce un número:"));
+    <h2>Ejercicio 1</h2>
 
-      document.write(
-        "<table border><tr><th>Número</th><th>Cuadrado</th><th>Cubo</th></tr>"
-      );
-      for (let i = 1; i <= num; i++) {
+    <!-- Ejercicio 1: Números, cuadrados y cubos -->
+    <script type="text/javascript">
+      let numero = parseInt(prompt("Introduce un número:"));
+      if (!isNaN(numero)) {
         document.write(
-          "<tr><td>" +
-            i +
-            "</td><td>" +
-            i * i +
-            "</td><td>" +
-            i * i * i +
-            "</td></tr>"
+          "<table border='1'><tr><th>Número</th><th>Cuadrado</th><th>Cubo</th></tr>"
         );
+        for (let i = 1; i <= numero; i++) {
+          let cuadrado = i * i;
+          let cubo = i * i * i;
+          document.write(
+            `<tr><td>${i}</td><td>${cuadrado}</td><td>${cubo}</td></tr>`
+          );
+        }
+        document.write("</table>");
+      } else {
+        alert("Por favor, introduce un número válido.");
       }
-      document.write("</table>");
     </script>
   </body>
 </html>
