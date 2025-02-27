@@ -28,7 +28,7 @@
     </script>
 
     <h2>Ejercicio 2</h2>
-    <!-- Ejercicio 1: Números, cuadrados y cubos -->
+    <!-- Ejercicio 2: suma de dos numeros aleatorios -->
     <script type="text/javascript">
       let num1 = Math.floor(Math.random() * 100);
       let num2 = Math.floor(Math.random() * 100);
@@ -46,6 +46,28 @@
         document.write("Respuesta incorrecta");
       }
       document.write(`\nTiempo: ${tiempo}`);
+    </script>
+
+    <h2>Ejercicio 3</h2>
+    <!-- Ejercicio 3: arreglo de numeros -->
+    <script type="text/javascript">
+      function contador(arreglo) {
+        let negativos = 0;
+        let ceros = 0;
+        let positivos = 0;
+        for (let num of arreglo) {
+          if (num < 0) {
+            negativos++;
+          } else if (num == 0) {
+            ceros++;
+          } else {
+            positivos++;
+          }
+          return { negativos, ceros, positivos };
+        }
+
+        console.log(contador([-1, 0, 2, 5, -3, 0]));
+      }
     </script>
   </body>
 </html>
