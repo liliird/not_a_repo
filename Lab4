@@ -45,10 +45,11 @@
       } else {
         document.write("Respuesta incorrecta");
       }
-      document.write(`\nTiempo: ${tiempo}`);
+      document.write(`<br>Tiempo: ${tiempo} segundos`);
     </script>
 
     <h2>Ejercicio 3</h2>
+
     <!-- Ejercicio 3: arreglo de numeros -->
     <script type="text/javascript">
       function contador(arreglo) {
@@ -136,6 +137,78 @@
       } else {
         document.write("<p>Por favor, introduce un número válido.</p>");
       }
+    </script>
+
+    <h2>Ejercicio 6</h2>
+    <h3>ACM Reverse Root</h3>
+    <p>
+      Programa que lee una secuencia de números enteros no negativos y muestra
+      sus raíces cuadradas en orden inverso. Cada número en la secuencia está en
+      el rango de 0 a 10^18. La entrada puede contener números separados por
+      espacios o saltos de línea.
+    </p>
+    <p>
+      <strong>Entrada:</strong> Una secuencia de números enteros no negativos
+      separados por espacios o saltos de línea.
+    </p>
+    <p>
+      <strong>Salida:</strong> Las raíces cuadradas de los números en orden
+      inverso al de la entrada, cada una en una línea separada con al menos
+      cuatro decimales.
+    </p>
+    <p><strong>Ejemplo:</strong></p>
+    <pre>
+        Entrada:
+        1427 0 876652098643267843 5276538
+        Salida:
+        2297.0716
+        936297014.1164
+        0.0000
+        37.7757
+        </pre
+    >
+    <button id="solveButton">Resolver</button>
+    <div id="outputDiv"></div>
+    <script src="script.js"></script>
+    <script>
+      function ReverseRootSolver() {
+        this.numbers = [];
+        this.roots = [];
+
+        this.readInput = function (inputStr) {
+          var parts = inputStr.split(/\s+/);
+          this.numbers = parts
+            .map(function (part) {
+              return parseInt(part, 10);
+            })
+            .filter(function (num) {
+              return !isNaN(num);
+            });
+        };
+
+        this.computeSquareRoots = function () {
+          this.roots = this.numbers.map(function (num) {
+            return Math.sqrt(num);
+          });
+        };
+
+        this.getResults = function () {
+          var results = [];
+          for (var i = this.roots.length - 1; i >= 0; i--) {
+            results.push(this.roots[i].toFixed(4));
+          }
+          return results.join("\n");
+        };
+      }
+      var solveButton = document.getElementById("solveButton");
+      solveButton.onclick = function () {
+        let inputStr = prompt("Ingrese los números separados por espacios:");
+        let solver = new ReverseRootSolver();
+        solver.readInput(inputStr);
+        solver.computeSquareRoots();
+        let outputDiv = document.getElementById("outputDiv");
+        outputDiv.textContent = solver.getResults();
+      };
     </script>
   </body>
 </html>
