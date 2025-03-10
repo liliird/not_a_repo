@@ -210,5 +210,7 @@
         outputDiv.textContent = solver.getResults();
       };
     </script>
+    <h2>Preguntas a responder</h2>
+    <h3>¿Qué diferencias y semejanzas hay entre Java y JavaScript?</h3>
   </body>
 </html>
