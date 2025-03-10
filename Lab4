@@ -55,6 +55,7 @@
         let negativos = 0;
         let ceros = 0;
         let positivos = 0;
+
         for (let num of arreglo) {
           if (num < 0) {
             negativos++;
@@ -63,10 +64,77 @@
           } else {
             positivos++;
           }
-          return { negativos, ceros, positivos };
         }
 
-        console.log(contador([-1, 0, 2, 5, -3, 0]));
+        return { negativos, ceros, positivos };
+      }
+
+      // Arreglo de ejemplo
+      const arregloNumeros = [-1, 0, 2, 5, -3, 0];
+
+      // Obtener resultado
+      const resultado = contador(arregloNumeros);
+
+      // Mostrar resultado en consola (para depuración)
+      console.log(resultado);
+
+      // Mostrar resultado en la página
+      document.write("<p>Resultados del conteo:</p>");
+      document.write(`<p>Números negativos: ${resultado.negativos}<p>`);
+      document.write(`<p>Ceros: ${resultado.ceros}<p>`);
+      document.write(`<p>Números positivos: ${resultado.positivos}<p>`);
+      document.write(`<p>Arreglo analizado: [${arregloNumeros}]</p>`);
+    </script>
+
+    <h2>Ejercicio 4</h2>
+    <script type="text/javascript">
+      function promedios(matriz) {
+        let promediosRenglones = [];
+        for (let renglon of matriz) {
+          let suma = 0;
+          for (let num of renglon) {
+            suma += num;
+          }
+          promediosRenglones.push(suma / renglon.length);
+        }
+        return promediosRenglones;
+      }
+
+      const matrizEjemplo = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+
+      const resultadoPromedios = promedios(matrizEjemplo);
+
+      document.write("<p>Promedios de cada renglón:</p>");
+      for (let i = 0; i < resultadoPromedios.length; i++) {
+        document.write(
+          `<p>Renglón ${i + 1}: ${resultadoPromedios[i].toFixed(2)}</p>`
+        );
+      }
+
+      document.write(
+        `<p>Matriz analizada: [${matrizEjemplo.map((row) => `[${row}]`)}]</p>`
+      );
+    </script>
+
+    <h2>Ejercicio 5</h2>
+    <script>
+      function inverso(numero) {
+        return parseInt(numero.toString().split("").reverse().join(""));
+      }
+
+      const numeroUsuario = parseInt(
+        prompt("Introduce un número para invertir sus dígitos:")
+      );
+      if (!isNaN(numeroUsuario)) {
+        document.write(
+          `<p>El inverso de ${numeroUsuario} es ${inverso(numeroUsuario)}</p>`
+        );
+      } else {
+        document.write("<p>Por favor, introduce un número válido.</p>");
       }
     </script>
   </body>
