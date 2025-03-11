@@ -230,8 +230,8 @@
     </p>
     <p>
       <strong>Compilación: </strong> Java traduce el código a binario para poder
-      ser ejecutado por la JVM. JavaScript presciende de un compilador y utiliza
-      un intérprete.
+      ser ejecutado por la JVM. JavaScript por su lado presciende de un
+      compilador y utiliza un intérprete.
     </p>
     <p>
       <strong>Orientación a objetos: </strong> En general, ambos lenguajes están
