@@ -211,6 +211,100 @@
       };
     </script>
     <h2>Preguntas a responder</h2>
-    <h3>¿Qué diferencias y semejanzas hay entre Java y JavaScript?</h3>
+    <h4>¿Qué diferencias y semejanzas hay entre Java y JavaScript?</h4>
+    <p>
+      <strong>Tipificación:</strong> Java es un lenguaje fuertemente tipado y
+      estático, mientras que JavaScript es un lenguaje de tipado dinámico y
+      débil.
+    </p>
+    <p>
+      <strong>Finalidad de uso: </strong> Java tiene un enfoque más amplio y es
+      adecuado para aplicaciones de escritorio y servidor. Por su parte,
+      JavaScript tiene un enfoque más estrecho y se utiliza comúnmente para
+      aplicaciones dentro de navegadores web.
+    </p>
+    <p>
+      <strong>Funcionalidad: </strong> Java puede ejecutarse de manera
+      independiente con la Java Virtual Machine (JVM). JavaScript está integrado
+      a HTML y requiere un navegador como parte de la página web para funcionar.
+    </p>
+    <p>
+      <strong>Compilación: </strong> Java traduce el código a binario para poder
+      ser ejecutado por la JVM. JavaScript presciende de un compilador y utiliza
+      un intérprete.
+    </p>
+    <p>
+      <strong>Orientación a objetos: </strong> En general, ambos lenguajes están
+      orientados a objetos, aunque JavaScript también puede ser programado de
+      manera funcional o procedimental. Además, la característica distintiva es
+      que JavaScript no utiliza clases. En su lugar, los objetos no se
+      instancian como clases, sino que se clonan a partir de objetos ya
+      existentes.
+    </p>
+
+    <h4>¿Qué métodos tiene el objeto Date?</h4>
+    <li>
+      <strong>Date.now() </strong>Devuelve el valor númerico correspondiente al
+      actual número de milisegundos transcurridos desde el 1 de Enero de 1970,
+      00:00:00 UTC, ignorando los segundos intercalares.
+    </li>
+    <li>
+      <strong>Date.parse() </strong>Transforma la cadena que representa una
+      fecha y retorna el número de milisegundos transcurridos desde el 1 de
+      Enero de 1970, 00:00:00 UTC, ignorando los segundos intercalares.
+    </li>
+    <li>
+      <strong>Date.UTC() </strong>Acepta los mismos parámetros de la forma
+      extendida del constructor (por ejemplo: del 2 al 7 ) y retorna el número
+      de milisegundos transcurridos desde el 1 de Enero de 1970, 00:00:00 UTC,
+      ignorando los segundos intercalares.
+    </li>
+    <li>
+      <strong>Date.prototype.getDate() </strong>Retorna el día del mes (1–31)
+      para la fecha especificada acorde a la hora local.
+    </li>
+    <li>
+      <strong>Date.prototype.getDay() </strong>Retorna el día de la semana (0–6)
+      para la fecha especificada acorde a la hora local.
+    </li>
+    <h4>¿Qué métodos tienen los arreglos?</h4>
+    <li>
+      <strong>push() </strong>Agrega uno o más elementos al final del arreglo.
+    </li>
+    <li>
+      <strong>pop() </strong>Elimina el último elemento del arreglo y lo
+      devuelve.
+    </li>
+    <li>
+      <strong>map() </strong>Crea un nuevo arreglo aplicando una función a cada
+      elemento.
+    </li>
+    <li>
+      <strong>filter() </strong>Crea un nuevo arreglo con los elementos que
+      cumplen una condición.
+    </li>
+    <li>
+      <strong>find() </strong>Devuelve el primer elemento que satisface una
+      condición dada.
+    </li>
+    <h4>
+      ¿Cómo se declara una variable con alcance local dentro de una función?
+    </h4>
+    <p>
+      Usando las palabras clave let o const dentro de la función. Esto asegura
+      que la variable solo sea accesible dentro de esa función y no desde fuera
+    </p>
+
+    <h4>
+      ¿Qué implicaciones tiene utilizar variables globales dentro de funciones?
+    </h4>
+    <p>
+      Usar variables globales dentro de funciones tiene ventajas limitadas a
+      conveniencia y simplicidad en programas pequeños, pero desventajas
+      importantes como conflictos de nombres, efectos secundarios, y
+      dificultades en pruebas y seguridad. Se recomienda minimizar su uso,
+      optando por variables locales, parámetros y módulos para un código más
+      robusto y mantenible.
+    </p>
   </body>
 </html>

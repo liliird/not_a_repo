@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>Laboratorio 1</title>
+  </head>
+  <body>
+    <h1 class="display-2 text-center">Laboratorio 1</h1>
+    <h2 class="text-center">
+      Introducción a las aplicaciones web, HTML5 y ciclo de vida de los sistemas
+      de información
+    </h2>
+
+    <p class="fs-4">Información de contacto</p>
+    <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+      Lilian Rodríguez Uribe <br />
+      A01711949 <br />
+      A01911949@tec.mx
+    </div>
+
+    <p class="fs-3">Preguntas</p>
+
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="false"
+            aria-controls="collapseOne"
+          >
+            ¿Cuál es la diferencia entre Internet y la World Wide Web?
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Internet es una inmensa red de computadoras alrededor de todo el
+            mundo conectadas entre sí. En cambio, la web (la World Wide Web) es
+            una enorme colección de páginas que se asienta sobre esa red de
+            computadoras (BBC News Mundo, 2019).
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            ¿Cuáles son las partes de un URL?
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Protocolo, dominio, ruta, parámetros.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            ¿Cuál es el propósito de los métodos HTTP: GET, HEAD, POST, PUT,
+            PATCH, DELETE?
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <dl>
+              <dt>GET</dt>
+              <dd>
+                Se usa este método de la misma manera que GET, pero con la
+                diferencia de que la respuesta de un HEAD no debe contener un
+                cuerpo, aunque incluirá los mismos encabezados que si se usara
+                GET. Se utiliza para verificar si un recurso está disponible
+                antes de hacer una solicitud GET.
+              </dd>
+
+              <dt>HEAD</dt>
+              <dd>
+                Este método se utiliza de la misma manera que GET, pero con la
+                diferencia de que el return del método HEAD no debería contener
+                cuerpo en la respuestas. Pero el return contiene los mismos
+                encabezados como si se usara GET. Se utiliza el método HEAD para
+                verificar si el recurso está presente.
+              </dd>
+
+              <dt>POST</dt>
+              <dd>
+                Se usa este método para enviar datos a un servidor con el fin de
+                crear un recurso.
+              </dd>
+
+              <dt>PUT</dt>
+              <dd>
+                Se usa este método para actualizar un recurso existente en un
+                servidor utilizando el contenido del cuerpo de la solicitud. Se
+                puede pensar en este método como una forma de "editar" algo.
+              </dd>
+
+              <dt>PATCH</dt>
+              <dd>
+                Se usa este método para aplicar modificaciones parciales a un
+                recurso.
+              </dd>
+
+              <dt>DELETE</dt>
+              <dd>Se usa este método para eliminar un recurso específico.</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+          >
+            ¿Qué método HTTP se debe utilizar al enviar un formulario HTML, por
+            ejemplo cuando ingresas tu usuario y contraseña en algún sitio? ¿Por
+            qué?
+          </button>
+        </h2>
+        <div
+          id="collapseFour"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            POST, ya que a diferencia de GET, este método no muestra los datos
+            en la URL.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFive"
+            aria-expanded="false"
+            aria-controls="collapseFive"
+          >
+            ¿Qué método HTTP se utiliza cuando a través de un navegador web se
+            accede a una página a través de un URL?
+          </button>
+        </h2>
+        <div
+          id="collapseFive"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            GET, ya que es un método seguro y que no modifica datos en el
+            servidor, debido a que solo recupera información.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSix"
+            aria-expanded="false"
+            aria-controls="collapseSix"
+          >
+            Un servidor web devuelve una respuesta HTTP con código 200. ¿Qué
+            significa esto? ¿Ocurrió algún error?
+          </button>
+        </h2>
+        <div
+          id="collapseSix"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            No, no ocurrió ningún error, esta respuesta indica que la solicitud
+            fue exitosa.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSeven"
+            aria-expanded="false"
+            aria-controls="collapseSeven"
+          >
+            ¿Es responsabilidad del desarrollador corregir un sitio web si un
+            usuario reporta que intentó acceder al sitio y se encontró con un
+            error 404? ¿Por qué?
+          </button>
+        </h2>
+        <div
+          id="collapseSeven"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Depende cual sea la causa de este error, es decir, en ocaciones se
+            recibe este mensaje de respuesta cuando el usuario escribió mal la
+            URL, sin embargo, hay casos como páginas que fueron modificadas o
+            eliminadas sin redirección, en este caso, sí es responsabilidad del
+            desarrollador corregirlo.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEight"
+            aria-expanded="false"
+            aria-controls="collapseEight"
+          >
+            ¿Es responsabilidad del desarrollador corregir un sitio web si un
+            usuario reporta que intentó acceder al sitio y se encontró con un
+            error 500? ¿Por qué?
+          </button>
+        </h2>
+        <div
+          id="collapseEight"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Sí, este tipo de error indica un error en el servidor interno, por
+            lo que el desarrollador tiene la responsabilidad de resolverlo.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseNine"
+            aria-expanded="false"
+            aria-controls="collapseNine"
+          >
+            ¿Qué significa que un atributo HTML5 esté depreciado o desaprobado
+            (deprecated)? Menciona algunos elementos de HTML 4 que en HTML5
+            estén desaprobados.
+          </button>
+        </h2>
+        <div
+          id="collapseNine"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Significa que su uso ya no se recomienda y podría ser eliminado en
+            futuras versiones del estándar. Algunos ejemplos son font, center,
+            big, small, acronym y frame.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTen"
+            aria-expanded="false"
+            aria-controls="collapseTen"
+          >
+            ¿Cuáles son las diferencias principales entre HTML 4 y HTML5?
+          </button>
+        </h2>
+        <div
+          id="collapseTen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            HTML introdujo mejoras significativas como nuevas etiquetas
+            semánticas (header, nav, article, section), formularios mejorados,
+            la eliminación de elementos obsoletos como font, center, frameset o
+            applet, entre varias otras mejoras que hacen a HTML5 más semántico,
+            moderno y potente.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEleven"
+            aria-expanded="false"
+            aria-controls="collapseEleven"
+          >
+            ¿Qué componentes de estructura y estilo tiene una tabla?
+          </button>
+        </h2>
+        <div
+          id="collapseEleven"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Una tabla HTML (table) es un conjunto de celdas (td o th)
+            organizadas en filas (tr) que a su vez se pueden organizar en grupos
+            de filas (thead, tbody o tfoot). Además, la tabla puede tener una
+            leyenda (caption) y hacer referencia a las columnas (col y colspan).
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwelve"
+            aria-expanded="false"
+            aria-controls="collapseTwelve"
+          >
+            ¿Cuáles son los principales controles de una forma HTML5?
+          </button>
+        </h2>
+        <div
+          id="collapseTwelve"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Los tipos de entrada comunes son button, checkbox, file, hidden,
+            image, password, radio, reset, submit y text.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThirteen"
+            aria-expanded="false"
+            aria-controls="collapseThirteen"
+          >
+            ¿Qué tanto soporte HTML5 tiene el navegador que utilizas?
+          </button>
+        </h2>
+        <div
+          id="collapseThirteen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">525/555 (Google Chrome)</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFourteen"
+            aria-expanded="false"
+            aria-controls="collapseFourteen"
+          >
+            Sobre el ciclo de vida y desarrollo de los sistemas de información:
+            ¿Cuál es el ciclo de vida de los sistemas de información?
+          </button>
+        </h2>
+        <div
+          id="collapseFourteen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            El ciclo de vida de un sistema de información comprende una serie de
+            etapas entre las que se encuentran planificación, análisis, diseño,
+            implementación, pruebas, instalación o despliegue, uso y
+            mantenimiento.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseFifteen"
+            aria-expanded="false"
+            aria-controls="collapseFifteen"
+          >
+            Como ingeniero de software ¿cuál es tu recomendación sobre el uso de
+            !important en un CSS?
+          </button>
+        </h2>
+        <div
+          id="collapseFifteen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Desde lo que he visto hasta ahora, !important es una forma de forzar
+            a que un estilo se aplique, mi recomendación sería evitar usarlo en
+            medida de lo posible, ya que puede hacer que el código sea más
+            difícil de entender y mantener, aunque sé que hay casos donde es
+            necesario usarlo, intentaría usarlo con moderación y solo cuando se
+            requiera realmente.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSixteen"
+            aria-expanded="false"
+            aria-controls="collapseSixteen"
+          >
+            Si se pone una imagen de fondo en una página HTML, ¿por qué debe
+            escogerse con cuidado?
+          </button>
+        </h2>
+        <div
+          id="collapseSixteen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Porque podía ser muy pesada y afectar el rendimiento de la página.
+            Además debe tener un color y constrate adecuados para que el texto y
+            otros elementos de la página sean legibles. Así como también debe
+            adaptarse a diferentes dispositivos y tamaños de pantalla.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseSeventeen"
+            aria-expanded="false"
+            aria-controls="collapseSeventeen"
+          >
+            Como ingeniero de software, ¿cuál es tu recomendación al elegir las
+            unidades de un propiedad de estilo entre %, px y pt?
+          </button>
+        </h2>
+        <div
+          id="collapseSeventeen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Yo recomendaría usar % para propiedades como width, height, margin o
+            padding, ya que es útil para crear diseños responsivos que se puedan
+            adaptar al tamaño de la pantalla. Px lo utilizaría para propiedades
+            que requieran un tamaño fijo y preciso como border-width o
+            font-size. Por su parte, pt es útil para propiedades relacionadas
+            con la tipografía, por lo que creo que es más apto para impresion
+            que para diseño web.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEighteen"
+            aria-expanded="false"
+            aria-controls="collapseEighteen"
+          >
+            ¿Por qué el uso de una versión minimizada del CSS mejora el
+            rendimiento del sitio?
+          </button>
+        </h2>
+        <div
+          id="collapseEighteen"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            Porque esto reduce el tamaño del archivo, lo que a su vez mejora el
+            rendimiento de la página. Menos código implica un tiempo de descarga
+            menor, esto optimiza la experiencia del usuario, aunque en ocasiones
+            sea por unidades de tiempo que este no alcance a percibir.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fs-4">Referencias bibliográficas</p>
+    <ol>
+      <li>
+        Aviani, G. (2019). An introduction to HTTP: everything you need to know.
+        freeCodeCamp.
+        https://www.freecodecamp.org/news/http-and-everything-you-need-to-know-about-it/
+      </li>
+      <li>
+        Ramos, C. (2022). HTTP Request Methods – Get vs Put vs Post Explained
+        with Code Examples. freeCodeCamp.
+        https://www.freecodecamp.org/news/http-request-methods-explained/
+      </li>
+      <li>
+        Copes, F. (2019). The HTML Handbook – Learn HTML for Beginners.
+        freeCodeCamp.
+        https://www.freecodecamp.org/news/the-html-handbook/#heading-tables
+      </li>
+      <li>
+        The HTML5 test - How well does your browser support HTML5? (n.d.).
+        HTML5test.com. https://html5test.com/
+      </li>
+      <li>
+        Bartolomé, M. (2022). Estructura de una tabla.
+        https://www.mclibre.org/consultar/htmlcss/html/html-tablas.html
+      </li>
+      <li>
+        Controles de formulario originales - Aprende desarrollo web | MDN.
+        (n.d.). MDN Web Docs.
+        https://developer.mozilla.org/es/docs/Learn_web_development/Extensions/Forms/Basic_native_form_controls
+      </li>
+      <li>
+        Controles de formulario originales - Aprende desarrollo web | MDN.
+        (n.d.). MDN Web Docs.
+        https://developer.mozilla.org/es/docs/Learn_web_development/Extensions/Forms/Basic_native_form_controls
+      </li>
+    </ol>
+    <script src="app2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
