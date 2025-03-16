@@ -1,0 +1,29 @@
+{
+  "name": "lab11",
+  "version": "1.0.0",
+  "description": "lab11",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liliird/not_a_repo.git"
+  },
+  "keywords": [
+    "\"TC2005B\""
+  ],
+  "author": "Lilian Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liliird/not_a_repo/issues"
+  },
+  "homepage": "https://github.com/liliird/not_a_repo#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

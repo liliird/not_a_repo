@@ -7,7 +7,7 @@ const app = express();
 // Middleware para procesar formularios
 app.use(express.urlencoded({ extended: false }));
 // Servir archivos estáticos
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "public")));
 
 const PORT = 3000;
 
