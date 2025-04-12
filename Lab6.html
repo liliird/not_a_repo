@@ -1,412 +1,1413 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Validador de Contraseñas Mejorado</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", sans-serif;
-      }
+ <!--Busqueda profesores -->
+ <div class="input-group mb-3 w-50 mx-auto">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Buscar..."
+    aria-label="Buscar"
+  />
+  <button id="demo" class="btn btn-outline-secondary" type="button">Buscar</button>
+</div>
+<!--Botones profesores -->
 
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #1a1a2e;
-        padding: 20px;
-      }
+    <% for (let profesor of profesores) { %>
+      <div class="container mt-4">
+          <div class="row justify-content-center">
 
-      .container {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 450px;
-      }
+      <div class="col-md-6 d-flex flex-column gap-2">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#profModal<%= profesor.matriculaProfesor %>"
+          data-prof-name="<%= profesor.nombreProfesor %>"
+          data-prof-id="<%= profesor.matriculaProfesor %>"
+        >
+        <%= profesor.nombreProfesor %>
+        </button>
 
-      h1 {
-        text-align: center;
-        color: #1a1a2e;
-        margin-bottom: 2rem;
-        transition: font-style 0.3s ease, color 0.3s ease;
-      }
-
-      h1:hover {
-        font-family: serif;
-        font-size: 2.18rem;
-        color: #6b90ba;
-      }
-
-      .input-group {
-        margin-bottom: 1.5rem;
-        position: relative;
-      }
-
-      input {
-        width: 100%;
-        padding: 0.8rem;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
-      }
-
-      label {
-        color: #484848;
-        margin-bottom: 0.5rem;
-        display: block;
-      }
-
-      .strength-meter {
-        height: 5px;
-        background: #ddd;
-        border-radius: 3px;
-        margin-top: 0.5rem;
-      }
-
-      .strength-fill {
-        height: 100%;
-        width: 0;
-        transition: width 0.3s ease, background-color 0.3s ease;
-      }
-
-      .requirements {
-        font-size: 0.9rem;
-        color: #666;
-        margin-top: 0.5rem;
-      }
-
-      .requirement {
-        padding: 0.2rem 0;
-        transition: color 0.3s ease;
-      }
-
-      .requirement.valid {
-        color: #2ecc71;
-      }
-
-      .match-status {
-        text-align: center;
-        padding: 0.5rem;
-        margin-top: 1rem;
-        border-radius: 5px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .match {
-        background: #dff0d8;
-        color: #3c763d;
-        opacity: 1;
-      }
-
-      .no-match {
-        background: #f2dede;
-        color: #a94442;
-        opacity: 1;
-      }
-
-      .toggle-password {
-        position: absolute;
-        right: 10px;
-        top: 45px;
-        cursor: pointer;
-        color: #666;
-      }
-
-      .tooltip {
-        position: absolute;
-        background: #493d60;
-        color: white;
-        padding: 0.5rem;
-        border-radius: 5px;
-        font-size: 0.8rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-        left: 100%;
-        margin-left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 200px;
-      }
-
-      .input-group:hover .tooltip {
-        opacity: 1;
-      }
-
-      .qa-section,
-      .references {
-        margin-top: 2rem;
-        font-size: 0.9rem;
-        color: #666;
-      }
-
-      .qa-section h3,
-      .references h3 {
-        color: #1a1a2e;
-        margin-bottom: 1rem;
-      }
-
-      .qa-section p {
-        margin-bottom: 1rem;
-      }
-
-      .references a {
-        color: #4a90e2;
-        text-decoration: none;
-      }
-
-      .references a:hover {
-        text-decoration: underline;
-      }
-
-      button {
-        background: #4a90e2;
-        color: white;
-        padding: 0.8rem;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 1rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Validador de Contraseñas</h1>
-      <form id="passwordForm">
-        <div class="input-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" required />
-          <span class="toggle-password" onclick="togglePassword('password')"
-            >◠</span
-          >
-          <div class="tooltip">
-            Usa una combinación de letras, números y símbolos para mayor
-            seguridad
-          </div>
-          <div class="strength-meter">
-            <div class="strength-fill"></div>
-          </div>
-          <div class="requirements">
-            <div class="requirement" data-check="length">
-              ✓ Mínimo 8 caracteres
-            </div>
-            <div class="requirement" data-check="uppercase">
-              ✓ Al menos una mayúscula
-            </div>
-            <div class="requirement" data-check="number">
-              ✓ Al menos un número
-            </div>
-            <div class="requirement" data-check="special">
-              ✓ Al menos un carácter especial
-            </div>
-          </div>
-        </div>
-        <div class="input-group">
-          <label for="confirmPassword">Confirmar Contraseña</label>
-          <input type="password" id="confirmPassword" required />
-          <span
-            class="toggle-password"
-            onclick="togglePassword('confirmPassword')"
-            >◠</span
-          >
-          <div class="tooltip">
-            Asegúrate de que coincida exactamente con la contraseña anterior
-          </div>
-        </div>
-        <div class="match-status" id="matchStatus"></div>
-        <button type="submit">Enviar al servidor</button>
-      </form>
-
-      <!-- Enlace a la ruta /about -->
-      <p style="text-align: center; margin-top: 1rem">
-        <a href="/about" style="color: #4a90e2">Acerca de</a>
-      </p>
-
-      <div class="qa-section">
-        <h3>Preguntas y Respuestas</h3>
-        <p>
-          <strong
-            >¿Por qué es una buena práctica usar JavaScript para checar que sean
-            válidos los inputs de las formas antes de enviar los datos al
-            servidor?</strong
-          ><br />
-          Es una buena práctica porque mejora la experiencia del usuario al
-          proporcionar retroalimentación inmediata sin esperar una respuesta del
-          servidor. Reduce la carga en el servidor al evitar envíos innecesarios
-          de datos inválidos y permite corregir errores en tiempo real,
-          ahorrando tiempo y recursos.
-        </p>
-
-        <p>
-          <strong
-            >¿Cómo puedes saltarte la seguridad de validaciones hechas con
-            JavaScript?</strong
-          ><br />
-          Las validaciones de JavaScript se pueden saltar porque se ejecutan en
-          el cliente. Por ejemplo, se puede desactivar JavaScript en el
-          navegador, modificar el código HTML/JS en las herramientas de
-          desarrollo, o enviar datos directamente al servidor ignorando el
-          formulario.
-        </p>
-
-        <p>
-          <strong
-            >Si te puedes saltar la seguridad de las validaciones de JavaScript,
-            entonces ¿por qué la primera pregunta dice que es una buena
-            práctica?</strong
-          ><br />
-          Aunque se pueden bypassar, sigue siendo una buena práctica porque
-          actúa como una primera línea de defensa y mejora la usabilidad. Sin
-          embargo, no debe ser la única validación; las validaciones en el
-          servidor son esenciales para la seguridad. JavaScript es para
-          conveniencia del usuario, mientras que el servidor garantiza la
-          integridad de los datos.
-        </p>
       </div>
+      
+    </div>
+    
+  </div>
+</div>
 
-      <div class="references">
-        <h3>Fuentes Consultadas:</h3>
-        <ul>
-          <li>
-            <a
-              href="https://www.w3schools.com/howto/howto_js_password_validation.asp"
-              target="_blank"
-              >How TO - Password Validation</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.w3schools.com/jsref/prop_style_fontstyle.asp"
-              target="_blank"
-              >Style fontStyle Property</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.w3schools.com/cssref/pr_font_font-size.php"
-              target="_blank"
-              >CSS font-size Property</a
-            >
-          </li>
-          <li>
-            <a href="https://www.w3schools.com/css/css_font.asp" target="_blank"
-              >CSS Fonts</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.freecodecamp.org/news/what-is-the-dom-document-object-model-meaning-in-javascript/"
-              target="_blank"
-              >What is the DOM? Document Object Model Meaning in JavaScript</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://www.freecodecamp.org/news/what-is-the-dom-document-object-model-meaning-in-javascript/"
-              target="_blank"
-              >What is the DOM? Document Object Model Meaning in JavaScript</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://dev.to/sharathchandark/password-validation-check-in-html-css-javascript-show-hide-password-toggle-4d7c"
-              target="_blank"
-              >Password Validation Check in HTML CSS & JavaScript | Show Hide
-              Password Toggle</a
-            >
-          </li>
-        </ul>
+<div
+  class="modal fade"
+  id="profModal<%= profesor.matriculaProfesor %>"
+  tabindex="-1"
+  aria-labelledby="modalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel">
+          Disponibilidad de horario
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+          <div id="matricula" class="invisible"><%= profesor.matriculaProfesor %></div>
+        <div class="row">
+          <div class="col-sm-2">
+             <dt class="col">Nombre:</dt>
+              <dt class="col">Matrícula:</dt> 
+          </div>
+          <div class="col">
+              <dd class="col" id="profName"></dd>
+          <dd class="col-6 id="profId"> <%= profesor.matriculaProfesor %> </dd>
+          </div>
+          
+          
+        </div>
+        <h6>Seleccione los horarios disponibles:</h6>
+        <!-- Cuadrícula de horarios (igual a la original) -->
+        <div class="selector-container">
+          <div class="row mb-2 text-center offset-2">
+              <div class="col-auto">Lunes</div>
+              <div class="col-auto">Martes</div>
+              <div class="col-auto">Miércoles</div>
+              <div class="col-auto">Jueves</div>
+              <div class="col-auto">Viernes</div>
+          </div>
+          <!-- Ejemplo para 7:00 (repite para cada hora hasta 15:00) -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">7:00</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-7-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-7-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-7-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-7-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-7-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-7-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-7-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-7-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-7-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-7-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 7:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">7:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-7-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-7-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-7-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-7-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-7-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-7-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-7-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-7-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-7-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-7-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 8:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">8:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-8-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-8-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-8-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-8-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-8-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-8-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-8-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-8-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-8-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-8-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+           <!-- 8:30 -->
+           <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">8:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-8-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-8-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-8-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-8-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-8-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-8-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-8-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-8-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-8-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-8-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+          <!-- 9:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">9:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-9-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-9-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-9-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-9-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-9-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-9-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-9-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-9-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-9-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-9-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+           <!-- 9:30 -->
+           <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">9:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-9-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-9-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-9-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-9-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-9-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-9-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-9-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-9-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-9-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-9-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+          <!-- 10:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">10:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-10-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-10-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-10-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-10-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-10-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-10-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-10-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-10-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-10-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-10-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 10:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">10:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-10-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-10-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-10-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-10-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-10-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-10-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-10-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-10-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-10-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-10-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+
+          <!-- 11:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">11:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-11-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-11-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-11-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-11-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-11-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-11-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-11-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-11-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-11-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-11-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 11:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">11:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-11-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-11-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-11-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-11-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-11-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-11-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-11-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-11-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-11-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-11-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+
+          <!-- 12:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">12:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-12-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-12-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-12-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-12-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-12-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-12-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-12-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-12-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-12-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-12-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 12:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">12:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-12-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-12-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-12-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-12-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-12-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-12-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-12-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-12-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-12-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-12-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+
+          <!-- 13:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">13:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-13-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-13-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-13-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-13-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-13-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-13-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-13-00"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-13-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-13-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-13-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 13:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">13:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-13-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-13-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-13-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-13-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-13-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-13-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-13-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-13-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-13-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-13-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+
+          <!-- 14:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">14:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-14-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-14-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-14-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-14-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-14-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-14-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-14-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-14-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-14-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-14-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+          <!-- 14:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">14:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-14-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-14-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-14-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-14-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-14-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-14-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-14-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-14-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-14-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-14-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+
+
+          <!-- 15:00 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">15:00</div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-15-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-15-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-15-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-15-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-15-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-15-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-15-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-15-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-15-00<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-15-00<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+          <!-- 15:30 -->
+          <div class="row mb-1 align-items-center">
+            <div class="col-2 text-end fw-bold">15:30</div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="lunes-15-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="lunes-15-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="martes-15-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="martes-15-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="miercoles-15-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="miercoles-15-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="jueves-15-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="jueves-15-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+            <div class="col text-center">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="viernes-15-30<%= profesor.matriculaProfesor %>"
+                autocomplete="off"
+              />
+              <label
+                class="btn btn-outline-primary"
+                style="width: 35px; height: 35px"
+                for="viernes-15-30<%= profesor.matriculaProfesor %>"
+              ></label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="saveAvailability<%= profesor.matriculaProfesor %>"
+          data-bs-dismiss="modal"
+          onclick="guardarHorario1()"
+        >
+          Aceptar
+        </button>
       </div>
     </div>
-
-    <script>
-      const passwordInput = document.getElementById("password");
-      const confirmInput = document.getElementById("confirmPassword");
-      const strengthFill = document.querySelector(".strength-fill");
-      const matchStatus = document.getElementById("matchStatus");
-      const requirements = document.querySelectorAll(".requirement");
-
-      const checks = {
-        length: /.{8,}/,
-        uppercase: /[A-Z]/,
-        number: /\d/,
-        special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
-      };
-
-      function updatePasswordStrength() {
-        const password = passwordInput.value;
-        let strength = 0;
-
-        requirements.forEach((req) => {
-          const check = req.dataset.check;
-          const isValid = checks[check].test(password);
-          req.classList.toggle("valid", isValid);
-          if (isValid) strength += 25;
-        });
-
-        strengthFill.style.width = `${strength}%`;
-        if (strength <= 25) {
-          strengthFill.style.backgroundColor = "#e74c3c";
-        } else if (strength <= 50) {
-          strengthFill.style.backgroundColor = "#e67e22";
-        } else if (strength <= 75) {
-          strengthFill.style.backgroundColor = "#f1c40f";
-        } else {
-          strengthFill.style.backgroundColor = "#2ecc71";
-        }
-
-        checkPasswordMatch();
-      }
-
-      function checkPasswordMatch() {
-        const password = passwordInput.value;
-        const confirm = confirmInput.value;
-
-        if (password && confirm) {
-          if (password === confirm) {
-            matchStatus.textContent = "¡Las contraseñas coinciden!";
-            matchStatus.classList.remove("no-match");
-            matchStatus.classList.add("match");
-          } else {
-            matchStatus.textContent = "Las contraseñas no coinciden";
-            matchStatus.classList.remove("match");
-            matchStatus.classList.add("no-match");
-          }
-        } else {
-          matchStatus.classList.remove("match", "no-match");
-        }
-      }
-
-      function togglePassword(inputId) {
-        const input = document.getElementById(inputId);
-        input.type = input.type === "password" ? "text" : "password";
-      }
-
-      passwordInput.addEventListener("input", updatePasswordStrength);
-      confirmInput.addEventListener("input", checkPasswordMatch);
-
-      document
-        .getElementById("passwordForm")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          if (
-            passwordInput.value === confirmInput.value &&
-            Object.values(checks).every((check) =>
-              check.test(passwordInput.value)
-            )
-          ) {
-            alert("¡Contraseña válida y confirmada!");
-          }
-        });
-    </script>
-  </body>
-</html>
+  </div>
+</div>
+<% } %>
+<script>
+  console.log('script');
+  const allProfesores = '<%- JSON.stringify(profesores) %>';
+  console.log(allProfesores);
+</script>
+<script src="/js/app2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
