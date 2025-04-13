@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Subir Imagen</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>¡Bienvenidx! Sube una imagen con descripción</h1>
+      <form action="/add" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo" accept="image/*" required />
+        <input
+          type="text"
+          name="descripcion"
+          placeholder="Escribe una descripción..."
+          required
+        />
+        <button type="submit">Subir</button>
+      </form>
+    </div>
+  </body>
+</html>

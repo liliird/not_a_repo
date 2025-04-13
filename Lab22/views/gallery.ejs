@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Galería</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Galería de imágenes</h2>
+      <div class="gallery">
+        <% imagenes.forEach(imagen => { %>
+        <div>
+          <img src="/<%= imagen.ruta %>" alt="Imagen" />
+          <p><%= imagen.descripcion %></p>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
