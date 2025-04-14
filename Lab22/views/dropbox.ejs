@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Galería Dropbox</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Imágenes desde Dropbox</h1>
+
+      <div class="gallery">
+        <% imageLinks.forEach(link => { %>
+        <img src="<%= link %>" alt="Imagen Dropbox" />
+        <% }) %>
+      </div>
+
+      <div style="margin-top: 50px">
+        <h2>Preguntas del Lab 26</h2>
+        <p>
+          <strong>¿Ventajas?</strong> Permite reutilizar servicios existentes
+          (Dropbox en este caso), se reduce el esfuerzo de desarrollo y
+          mantenimiento. Puedes mostrar contenido alojado en la nube sin tener
+          que gestionarlo tú mismo.
+        </p>
+        <p>
+          <strong>¿Desventajas?</strong> Dependes de un servicio externo, que
+          puede cambiar, requerir autenticación avanzada, tener límites de uso o
+          dejar de estar disponible.
+        </p>
+      </div>
+      <a href="/" class="btn-secundario">Volver a mi galería</a>
+    </div>
+  </body>
+</html>

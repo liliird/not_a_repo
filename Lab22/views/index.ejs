@@ -14,10 +14,16 @@
       <h1>¡Hola! Bienvenidx a tu galería personal</h1>
       <p class="subtitle">Sube tu imagen aquí para visualizarla</p>
 
-      <form action="/archivo" method="POST" enctype="multipart/form-data">
+      <form
+        action="/imagenes/agregar"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <input type="file" name="archivo" accept="image/*" required />
         <button type="submit">Subir Imagen</button>
       </form>
+
+      <a href="/dropbox" class="btn-secundario">Ver galería Dropbox</a>
 
       <h2>Tus imágenes subidas</h2>
       <div class="gallery">
